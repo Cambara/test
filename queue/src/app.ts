@@ -6,7 +6,7 @@ const app = applyExpressPlugins(express())
 app.use(express.json())
 
 app.get('/api/test', (req, res) => {
-  console.log('chamou si')
+  console.log('chamou si.')
   return res.json({name: 'tiago'})
 })
 
