@@ -1,0 +1,30 @@
+version: '3.3'
+services:
+  web:
+    build: .
+    restart: always
+    hostname: web
+    env_file:
+      - .env
+    environment:
+      - QUEUE_HOST=queue
+      - WEB_HOST=web
+    ports:
+      - "3000:3000"
+    networks:
+      - backend
+      - frontend
+  queue:
+    build: ./queue
+    restart: always
+    hostname: queue
+    env_file:
+      - ./queue/.env
+    networks:
+      - backend
+networks:
+  backend:
+    driver: bridge
+  frontend:
+    external:
+      name: infrastructure-api
